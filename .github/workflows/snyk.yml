@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Clone Repository into GitHub Actions Runner
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install Repository Dependencies
         run: npm install
 
       - name: Install and Authenticate Snyk
@@ -27,10 +27,9 @@ jobs:
             npm install snyk -g
             snyk auth ${{ secrets.SNYK_TOKEN }}
 
-      - name: Run Snyk test to Catch Vulnerabilities
+      - name: Run Snyk Scan to Catch Vulnerabilities
         run: snyk test || true
 
-      - name: Snyk Open Source to Monitor Project
+      - name: Send Monitoring Snapshot
         run: snyk monitor
 
-        #Test Github Actions Pipeline
