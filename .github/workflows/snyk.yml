@@ -33,5 +33,5 @@ jobs:
       - name: Send Monitoring Snapshot
         run: snyk monitor
 
-        #Pipeline Test
+
 
